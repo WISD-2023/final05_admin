@@ -25,16 +25,12 @@
                           $voteid = $vote->id;
                           $voteRecords = voting_record::Where('vote_id','=',$voteid)->first();                          
                         @endphp
-                        @if($voteRecords  && $voteRecords->members_id == Auth::user()->id) 
-                            <x-primary-button>已投票</x-primary-button>                        
-                        @else
-                            <form method="POST" action="{{route('Vote.update')}}">
-                                @csrf
-                                @method('patch')
-                                <input type="hidden" name="VoteID" value="{{ $vote->id }}">
-                                <x-primary-button>投票</x-primary-button>
-                            </form>
-                        @endif
+                        <form method="POST" action="{{route('Vote.update')}}">
+                            @csrf
+                            @method('patch')
+                            <input type="hidden" name="VoteID" value="{{ $vote->id }}">
+                            <x-primary-button>批准</x-primary-button>
+                        </form>
                     </div>
                 </div>
             </div>

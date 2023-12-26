@@ -67,7 +67,7 @@ class VoteController extends Controller
     public function update(Request $request)
     {
         $vote = Vote::where('id','=',$request['VoteID'])->first();
-        $vote->Total_vote+=1;
+        $vote->Result = "已通過";
 
         $vote->save();
         return redirect(route('VotingRecord.store', ['VoteID' => $request['VoteID']]));
