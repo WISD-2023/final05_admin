@@ -8,6 +8,8 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\VotingRecordController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserBlockController;
+use App\Http\Controllers\BlacklistedController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -32,6 +34,28 @@ Route::get('Home', [HomeConrtroller::class,'index'])->name('Home');
 Route::get('Forum/{forumName}', [ForumController::class,'show'])->name('Forum');
 
 Route::get('Article/{articleName}', [ArticleController::class,'show'])->name('Article');
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('ReportCreate',[ReportController::class,'create'])->name('Report.create');
+    Route::post('Report',[ReportController::class,'store'])->name('Report.store');
+    Route::get('ReportShow',[ReportController::class,'show'])->name('Report.show');
+    Route::delete('Report',[ReportController::class,'destroy'])->name('Report.destroy');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::patch('Userblock',[UserBlockController::class,'block'])->name('UserBlock.block');
+    Route::get('Block',[BlacklistedController::class,'store'])->name('Blacklisted.store');
+    Route::get('BlocklistShow',[BlacklistedController::class,'show'])->name('Blacklisted.show');
+    Route::delete('Blocklist', [BlacklistedController::class,'destroy'])->name('Blacklisted.destroy');
+    Route::get('UserUnblock',[UserBlockController::class,'Unblock'])->name('UserBlock.Unblock');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::get('ForumCreate',[ForumController::class,'create'])->name('Forum.create');
+    Route::post('Forum',[ForumController::class,'store'])->name('Forum.store');
+    Route::delete('Forum', [ForumController::class,'destroy'])->name('Forum.destroy');
+});
 
 Route::middleware('auth')->group(function(){
     Route::get('ArticleCreate/{fourmID}', [ArticleController::class,'create'])->name('Article.create');
@@ -59,10 +83,7 @@ Route::middleware('auth')->group(function(){
     Route::get('VotingRecord/{VoteID}',[VotingRecordController::class,'store'])->name('VotingRecord.store');
 });
 
-Route::middleware('auth')->group(function(){
-    Route::get('ReportCreate',[ReportController::class,'create'])->name('Report.create');
-    Route::post('Report',[ReportController::class,'store'])->name('Report.store');
-});
+
 
 
 Route::get('/dashboard', function () {

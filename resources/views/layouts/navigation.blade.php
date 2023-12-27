@@ -21,6 +21,15 @@
                     <x-nav-link :href="route('Vote.show')" onclick="event.preventDefault(); document.getElementById('VOTESHOW').submit();" :active="request()->routeIs('Vote.show')">
                             {{ __('投票清單') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('Forum.create')" :active="request()->routeIs('Forum.create')">
+                            {{ __('開設討論區') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('Report.show')" :active="request()->routeIs('Report.show')">
+                            {{ __('查看檢舉名單') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('Blacklisted.show')" :active="request()->routeIs('Blacklisted.show')">
+                            {{ __('查看檢舉名單') }}
+                    </x-nav-link>
                 </div>
             </div>
 

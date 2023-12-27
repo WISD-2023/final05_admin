@@ -29,7 +29,7 @@ class ArticleController extends Controller
     //
     $validated = $request->validate([
         'title' => 'required|string|max:255',
-        'comment' => 'required|string|max:255',
+        'comment' => 'required|string|max:5000',
     ]);
 
     $article = new Article();

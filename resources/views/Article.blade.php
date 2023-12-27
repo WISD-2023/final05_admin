@@ -1,6 +1,8 @@
 @php
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Member;
+use App\Models\User;
 @endphp
 @if (Auth::check())
     @include('layouts.navigation_article')
@@ -21,7 +23,15 @@ use Illuminate\Support\Facades\Auth;
                     $article = Article::where('Name','=',$articleName)->first();
                     $ArticleID = $article->id;
                     $ArticleName = $article->Name;
-                    $member = \App\Models\Member::find($article->members_id);
+                    if(Member::find($article->members_id)){
+                        $member = Member::find($article->members_id);
+                    }
+                    else if(User::find($article->members_id)){
+                        $member = User::find($article->members_id);
+                    }
+                    else{
+
+                    }                   
                     @endphp
                     <div class="flex-1">
                         <span class="text-gray-800">
@@ -30,9 +40,6 @@ use Illuminate\Support\Facades\Auth;
                         <small class="ml-2 text-sm text-gray-600 mr-4">{{ $article->created_at->format('j M Y, g:i a')
                             }}</small>
                     </div>
-                    @unless ($article->created_at->eq($article->updated_at))
-                    @endunless
-                    @if (Auth::check() && $article->members_id==Auth::user()->id)
                     <x-dropdown>
                         <x-slot name="trigger">
                             <button>
@@ -61,10 +68,9 @@ use Illuminate\Support\Facades\Auth;
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
-                    @endif
-                </div>
+                </div>           
                 <div class="ml-4">
-                    <p class="ml-4 mb-4">{{$article->Content}}</p>
+                    <p class="ml-4 mb-4 mr-4">{!! nl2br(e($article->Content)) !!}</p>
                 </div>
             </div>
         </div>
@@ -111,9 +117,6 @@ use Illuminate\Support\Facades\Auth;
                     <p><b>{{ $Member->name }}</b></p>
                     <div class="flex">
                         <p class="ml-4 flex-1">{{ $comment->Content }}</p>
-                        @unless ($comment->created_at->eq($comment->updated_at))
-                        @endunless
-                        @if (Auth::check() && $comment->members_id==Auth::user()->id)
                         <x-dropdown>
                             <x-slot name="trigger">
                                 <button>
@@ -149,7 +152,6 @@ use Illuminate\Support\Facades\Auth;
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
-                        @endif
                     </div>
                     <br>
                     @endforeach

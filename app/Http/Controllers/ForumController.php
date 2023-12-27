@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use App\Models\Forum;
 
 class ForumController extends Controller
 {
@@ -19,15 +21,32 @@ class ForumController extends Controller
      */
     public function create()
     {
-        //
+        return view('CreateForum');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'ForumName' => 'required|string|max:255',
+        ]);
+
+        $result = Forum::where('forum_name', $validated['ForumName'])->exists();
+
+        if($result){
+            return redirect()->route('Forum.create')->withErrors(['ForumName' => '該論壇名稱已經存在。']);
+        }
+        else{
+            $forum = new Forum();
+            $forum->forum_name = $validated['ForumName'];
+            $forum->number_of_forum = 0;
+    
+            $forum->save();
+    
+            return redirect(route('dashboard'));
+        }        
     }
 
     /**
@@ -57,8 +76,17 @@ class ForumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request): RedirectResponse
     {
-        //
+        $forumId = (int)($request['ForumID']);
+        $forumName = $request['ForumName'];
+        $forum = Forum::find($forumId);
+        if($forum->forum_name == $forumName){
+            $forum->delete();
+            return redirect(route('dashboard'));
+        }
+        else{
+            return redirect(route('dashboard'));
+        }        
     }
 }

@@ -10,6 +10,10 @@ class Forum extends Model
     use HasFactory;
     protected $table = 'forum';
 
+    protected $fillable = [
+        'forum_name',
+        'number_of_forum',
+    ];
     public function article()
     {
         return $this->haveMany(Article::class);

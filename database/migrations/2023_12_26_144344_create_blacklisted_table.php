@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('forum', function (Blueprint $table) {
+        Schema::create('blacklisted', function (Blueprint $table) {
             $table->id();
-            $table->string('forum_name');
-            $table->integer('number_of_forum');
+            $table->unsignedBigInteger('members_id');
             $table->timestamps();
         });
     }
@@ -24,9 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('forum');
+        Schema::dropIfExists('blacklisted');
     }
 };
-/*
-           
-*/

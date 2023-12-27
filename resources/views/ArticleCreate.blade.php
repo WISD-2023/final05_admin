@@ -26,7 +26,7 @@ $ForumName = $Forum->forum_name;
                         <textarea name="comment" placeholder="{{ __('輸入文章內容') }}"
                             class="block w-full h-24 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('message') }}</textarea>
                         <br>
-                        <x-input-error :messages="$errors->get('message')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
                         <x-primary-button class="mt-4">{{ __('送出') }}</x-primary-button>
                     </form>
                 </div>
