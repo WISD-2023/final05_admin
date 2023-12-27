@@ -44,6 +44,7 @@ class ForumController extends Controller
             $forum->number_of_forum = 0;
     
             $forum->save();
+            session()->flash('success', '操作成功');
     
             return redirect(route('dashboard'));
         }        
