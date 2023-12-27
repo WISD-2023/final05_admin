@@ -16,6 +16,7 @@ class BlacklistedController extends Controller
         $BlackListed->members_id = $memberID;
 
         $BlackListed->save();
+        session()->flash('successMessage', '封鎖成功');
         return redirect(route('Report.show'));
     }
     public function show()

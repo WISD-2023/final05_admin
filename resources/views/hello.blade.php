@@ -5,6 +5,13 @@ use App\Models\blacklisted;
 use App\Models\Member;
 
 @endphp
+
+@if(session('success'))
+    <script>
+        alert("{{ session('successMessage') }}");
+    </script>
+@endif  
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -28,7 +35,6 @@ use App\Models\Member;
                         @php
                             $acc_user = Member::find($report->Acc_id);
                             $com_user = Member::find($report->Com_id);
-                            $isblocked = blacklisted::Where('members_id','=',$report->Acc_id)->first();
                         @endphp
                         <div class="flex mt-4">
                             <p class="flex-1">{{$report->id}}</p>
@@ -36,7 +42,7 @@ use App\Models\Member;
                             <p class="flex-1">{{$acc_user->name}}</p>
                             <p class="flex-1">{{$report->Reason}}</p>
                             <div class="flex-1">
-                                @if($isblocked)
+                                @if($report->is_handle)
                                     <p>已結案</p>                                
                                 @else
                                     <form method="POST" action="{{route('UserBlock.block')}}">

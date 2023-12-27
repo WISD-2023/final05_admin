@@ -28,7 +28,7 @@
                             {{ __('查看檢舉名單') }}
                     </x-nav-link>
                     <x-nav-link :href="route('Blacklisted.show')" :active="request()->routeIs('Blacklisted.show')">
-                            {{ __('查看檢舉名單') }}
+                            {{ __('查看黑名單') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -19,18 +19,22 @@
                     <br>
                     <div class = "flex">
                         <p class = "flex-1">{{$vote->Content}}</p>
-                        <p class = "flex-1">{{$vote->Total_vote}}</p>
+                        <div class = "flex-1"><p class = "ml-4">{{$vote->Total_vote}}</p></div>
                         <p class = "flex-1">{{$vote->Result}}</p>
                         @php
                           $voteid = $vote->id;
                           $voteRecords = voting_record::Where('vote_id','=',$voteid)->first();                          
                         @endphp
-                        <form method="POST" action="{{route('Vote.update')}}">
-                            @csrf
-                            @method('patch')
-                            <input type="hidden" name="VoteID" value="{{ $vote->id }}">
-                            <x-primary-button>批准</x-primary-button>
+                        @if($vote->Result == '已通過')
+                            <x-primary-button>通過</x-primary-button>
+                        @else
+                            <form method="POST" action="{{route('Vote.update')}}">
+                                @csrf
+                                @method('patch')
+                                <input type="hidden" name="VoteID" value="{{ $vote->id }}">
+                                <x-primary-button>批准</x-primary-button>
                         </form>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ class Report extends Model
         'Com_id',
         'Reason',
         'Acc_id',
+        'is_handle',
     ];
 
     protected $guarded = ['*'];

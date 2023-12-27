@@ -19,9 +19,6 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('首頁') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('Article.create', ['fourmID' => $ForumID])"  :active="request()->routeIs('Article.create')">
-                            {{ __('發布文章') }}
-                    </x-nav-link>
                 </div>
             </div>
 

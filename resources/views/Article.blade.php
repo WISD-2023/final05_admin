@@ -76,30 +76,6 @@ use App\Models\User;
         </div>
     </div>
 
-    <div class="py-1">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    @if (Auth::check())
-                        <form method="POST" action="{{ route('Comment.store') }}">
-                            @csrf
-                            <input type="hidden" name="ArticleID" value="{{ $ArticleID }}">
-                            <input type="hidden" name="ArticleName" value="{{ $ArticleName }}">
-                            <label for="Content">留言</label>
-                            <textarea name="Content"
-                                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
-                            <br>
-                            <div class = "flex justify-end">
-                                <x-primary-button>發布</x-primary-button>
-                            </div>
-                        </form>
-                        @else
-                            <p class = "text-gray-500">你要登入才能留言</p>
-                        @endif
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -128,17 +104,6 @@ use App\Models\User;
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <form id="EDITCOMMENT" method="POST" action="{{ route('Comment.edit') }}"
-                                    class="hidden">
-                                    @csrf
-                                    <input type="hidden" name="CommentID" value="{{ $comment->id }}">
-                                    <input type="hidden" name="CommentContent" value="{{ $comment->Content }}">
-                                </form>
-                                <x-dropdown-link :href="route('Comment.edit')"
-                                    onclick="event.preventDefault(); document.getElementById('EDITCOMMENT').submit();"
-                                    :active="request()->routeIs('Comment.destroy')">
-                                    {{ __('編輯留言') }}
-                                </x-dropdown-link>
                                 <form id="EDLETECOMMENT" method="POST" action="{{ route('Comment.destroy') }}"
                                     class="hidden">
                                     @csrf
