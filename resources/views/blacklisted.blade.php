@@ -1,12 +1,13 @@
-@include('layouts.navigationgeneral')
+@include('layouts.navigationgeneral') <!-- 引入導引列 -->
+<!-- 引入各種模型 -->
 @php
-use App\Models\Report;
-use App\Models\blacklisted;
-use App\Models\Member;
+    use App\Models\Report;
+    use App\Models\blacklisted;
+    use App\Models\Member;
 
 @endphp
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header"> <!-- 顯示頁面主題 -->
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             檢舉清單
         </h2>
@@ -22,6 +23,8 @@ use App\Models\Member;
                         <p class="flex-1">被封鎖者</p>
                         <p class="flex-1">操作</p>
                     </div>
+
+                    <!-- 顯示所有檢舉 -->
                     @forelse (blacklisted::all() as $blacklisted)
                         @php
                             $block_user = Member::find($blacklisted->members_id);

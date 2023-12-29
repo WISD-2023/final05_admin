@@ -1,15 +1,18 @@
-@include('layouts.navigation')
+@include('layouts.navigation') <!-- 顯示導覽列 -->
+<!-- 導入 -->
 @php 
     use App\Models\Vote;
     use App\Models\voting_record;
     use Illuminate\Support\Facades\Auth;
 @endphp
-<x-app-layout>
+<x-app-layout> <!-- 顯示頁面主題 -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             投票清單
         </h2>
     </x-slot>
+
+    <!-- 顯示所有投票 -->
     @foreach (Vote::all() as $vote)
     <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -25,6 +28,7 @@
                           $voteid = $vote->id;
                           $voteRecords = voting_record::Where('vote_id','=',$voteid)->first();                          
                         @endphp
+                        
                         @if($vote->Result == '已通過')
                             <x-primary-button>通過</x-primary-button>
                         @else

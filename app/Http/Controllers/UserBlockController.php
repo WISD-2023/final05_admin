@@ -16,7 +16,10 @@ class UserBlockController extends Controller
         $user = Member::find($AccID);
         $user->is_blocked = true;
 
-        $report = Report::Where('Acc_id','=',$AccID)->first();
+        $report = Report::where([
+            ['Acc_id', '=', $AccID],
+            ['is_handle', '=', 'false']
+        ])->first();
         $report->is_handle = true;
 
         $report->save();

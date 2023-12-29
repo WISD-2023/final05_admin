@@ -1,12 +1,15 @@
-@include('layouts.navigationgeneral')
+@include('layouts.navigationgeneral') <!-- 引入導引列 -->
+
+<!-- 引入各種模型 -->
 @php
-use App\Models\Report;
-use App\Models\blacklisted;
-use App\Models\Member;
+    use App\Models\Report;
+    use App\Models\blacklisted;
+    use App\Models\Member;
 
 @endphp
 
-@if(session('success'))
+<!-- 判斷是否有回傳訊息已顯示提醒視窗 -->
+@if(session('success'))  
     <script>
         alert("{{ session('successMessage') }}");
     </script>
@@ -41,6 +44,7 @@ use App\Models\Member;
                             <p class="flex-1">{{$com_user->name}}</p>
                             <p class="flex-1">{{$acc_user->name}}</p>
                             <p class="flex-1">{{$report->Reason}}</p>
+                            <!-- 根據已處理欄位來顯示封鎖還是已結案 -->
                             <div class="flex-1">
                                 @if($report->is_handle)
                                     <p>已結案</p>                                
