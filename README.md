@@ -1,66 +1,44 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# 系統畫面
+  首頁
+  ![](https://i.imgur.com/0xokqXV.jpeg)
+  開設討論區
+  ![](https://i.imgur.com/kjifCIU.jpeg)
+  投票清單
+  ![](https://i.imgur.com/yyMjbhI.jpeg)
+  檢舉清單
+  ![](https://i.imgur.com/23JmgqZ.jpeg)
+  黑名單
+  ![](https://i.imgur.com/yrWI2d3.jpeg)
+  其他均與使用者端相同
+# 系統的主要功能
+  使用者端均為[3B032089 阮彥翔](https://github.com/3B032089)
+  * 首頁 Route::get('Home', [HomeConrtroller::class,'index'])->name('Home');
+  * 討論區 Route::get('Forum/{forumName}', [ForumController::class,'show'])->name('Forum');
+  * 文章 Route::get('Article/{articleName}', [ArticleController::class,'show'])->name('Article');
+  * 刪除文章 Route::delete('Article', [ArticleController::class,'destroy'])->name('Article.destroy');
+  * 刪除留言 Route::delete('Comment', [CommentsController::class,'destroy'])->name('Comment.destroy');
+  * 投票清單 Route::post('VotelistShow',[VoteController::class,'show'])->name('Vote.show');
+  * 批准 Route::patch('Vote',[VoteController::class,'update'])->name('Vote.update');
+  * 檢舉清單 Route::get('ReportShow',[ReportController::class,'show'])->name('Report.show');
+  * 封鎖使用者 Route::patch('Userblock',[UserBlockController::class,'block'])->name('UserBlock.block');
+  * 解除封鎖使用者 Route::get('UserUnblock',[UserBlockController::class,'Unblock'])->name('UserBlock.Unblock');
+# ERD
+   ![](https://i.imgur.com/bd0q2X7.jpg)
+# 關聯式綱要圖綱要圖
+   ![](https://i.imgur.com/fh2dE38.jpeg)
+   ![](https://i.imgur.com/io2SllQ.jpeg)
+# 初始專案與DB負責的同學
+   * 初始專案 [3B032089 阮彥翔](https://github.com/3B032089)
+   * DB [3B032080 謝東霖](https://github.com/3B032080)、[3B032089 阮彥翔](https://github.com/3B032089)
+# 系統測試資料存放位置
+   根目錄的forum
+# 系統使用者測試帳號
+   使用者端：
+      * 帳號：Yaesakura716207@gmail.com
+      * 密碼：Tsukasa716207
+   管理員端：
+      * 帳號：fuuzuki0307@gmail.com
+      * 密碼：Tsukasa1600
+# 系統開發人員與工作分配
+   * 使用者端：[3B032089 阮彥翔](https://github.com/3B032089)
+   * 管理員端：[3B032080 謝東霖](https://github.com/3B032080)
